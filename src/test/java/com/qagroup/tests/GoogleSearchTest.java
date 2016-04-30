@@ -4,12 +4,17 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.qagroup.pages.Google;
 import com.qagroup.pages.SearchResultsPage;
+import com.qagroup.tools.GoogleTestListener;
+import com.qagroup.tools.IWebApp;
+import com.qagroup.tools.IWebAppTest;
 
-public class GoogleSearchTest {
+@Listeners(GoogleTestListener.class)
+public class GoogleSearchTest implements IWebAppTest {
 
 	private Google google = new Google();
 
@@ -21,7 +26,6 @@ public class GoogleSearchTest {
 	@BeforeClass
 	public void setUp() {
 		searchResultsPage = google.openStartPage().searchFor(textToSearch);
-		// searchResultsPage = GoogleStartPage.open().searchFor(textToSearch);
 	}
 
 	@Test
@@ -34,5 +38,10 @@ public class GoogleSearchTest {
 	@AfterClass(alwaysRun = true)
 	public void tearDown() {
 		google.close();
+	}
+
+	@Override
+	public IWebApp getTestedInstance() {
+		return google;
 	}
 }
