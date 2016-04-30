@@ -29,7 +29,7 @@ public class GoogleKeyboardSmokeTest implements IWebAppTest {
 	@Test
 	@Description(value = "Google keyboard smoke test")
 	public void testKeyboardAppears() {
-		googleStartPage.openKeyboard();
+		googleStartPage.openScreenKeyboard();
 
 		assertTrue(googleStartPage.isKeyboardDisplayed(), "Keyboard should be displayed on Google start page.");
 	}

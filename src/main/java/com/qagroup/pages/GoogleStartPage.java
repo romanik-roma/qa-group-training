@@ -51,7 +51,7 @@ public class GoogleStartPage {
 	}
 
 	@Step
-	public void openKeyboard() {
+	public void openScreenKeyboard() {
 		clickOnKeyboardIcon();
 	}
 
@@ -67,5 +67,16 @@ public class GoogleStartPage {
 	@Step
 	public void closeKeyboard() {
 		keyboardCloseButton.click();
+	}
+
+	@Step
+	public void enterFromScreenKeyboard(String string) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Step
+	public String getSearchInputFieldValue() {
+		return null;
 	}
 }
