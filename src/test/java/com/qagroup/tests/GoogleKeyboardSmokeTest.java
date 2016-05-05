@@ -31,14 +31,14 @@ public class GoogleKeyboardSmokeTest implements IWebAppTest {
 	public void testKeyboardAppears() {
 		googleStartPage.openScreenKeyboard();
 
-		assertTrue(googleStartPage.isKeyboardDisplayed(), "Keyboard should be displayed on Google start page.");
+		assertTrue(googleStartPage.isScreenKeyboardDisplayed(), "Keyboard should be displayed on Google start page.");
 	}
 
 	@Test(dependsOnMethods = { "testKeyboardAppears" })
 	public void testKeyboardDisappears() {
 		googleStartPage.closeKeyboard();
 
-		assertFalse(googleStartPage.isKeyboardDisplayed(), "Keyboard should not be displayed on Google start page.");
+		assertFalse(googleStartPage.isScreenKeyboardDisplayed(), "Keyboard should not be displayed on Google start page.");
 	}
 
 	@AfterClass

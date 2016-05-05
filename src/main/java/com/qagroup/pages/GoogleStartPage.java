@@ -60,7 +60,8 @@ public class GoogleStartPage {
 		keyboardIcon.click();
 	}
 
-	public boolean isKeyboardDisplayed() {
+	@Step("Checks if Screen Keyboard is Displayed")
+	public boolean isScreenKeyboardDisplayed() {
 		return keyboard.isDisplayed();
 	}
 
@@ -72,7 +73,6 @@ public class GoogleStartPage {
 	@Step
 	public void enterFromScreenKeyboard(String string) {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Step
