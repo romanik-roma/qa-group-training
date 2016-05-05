@@ -30,7 +30,7 @@ public class KeyboardInputInteractionTest implements IWebAppTest {
 		assertEquals(googleStartPage.getSearchInputFieldValue(), typedText, "Incorrect text in Search input field:");
 	}
 
-	@AfterClass(alwaysRun = true)
+	//@AfterClass(alwaysRun = true)
 	public void tearDown() {
 		google.close();
 	}

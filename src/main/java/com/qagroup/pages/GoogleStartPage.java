@@ -1,5 +1,10 @@
 package com.qagroup.pages;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,6 +28,9 @@ public class GoogleStartPage {
 
 	@FindBy(css = ".vk-t-btn")
 	private WebElement keyboardCloseButton;
+
+	@FindBy(css = ".vk-btn")
+	private List<WebElement> keys;
 
 	private WebDriver innerDriver;
 
@@ -72,11 +80,40 @@ public class GoogleStartPage {
 
 	@Step
 	public void enterFromScreenKeyboard(String string) {
-		// TODO Auto-generated method stub
+		List<String> keyValues = new ArrayList<>();
+
+		for (WebElement key : keys) {
+			String value = key.getText();
+			keyValues.add(value);
+		}
+
+		String[] letters = string.split("");
+
+		for (String letter : letters) {
+			int index = keyValues.indexOf(letter);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			keys.get(index).click();
+		}
+	}
+
+	private void clickJS(WebElement element) {
+		((JavascriptExecutor) innerDriver).executeScript("arguments[0].click()", element);
 	}
 
 	@Step
 	public String getSearchInputFieldValue() {
-		return null;
+		return inputField.getAttribute("value");
+	}
+
+	public static void main(String[] args) {
+		String hello = "Hello world";
+		String[] array = hello.split("");
+
+		System.out.println(Arrays.toString(array));
 	}
 }
