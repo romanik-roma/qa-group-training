@@ -1,15 +1,19 @@
 package com.qagroup.tests;
 
+import static org.testng.Assert.assertEquals;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import static org.testng.Assert.*;
 
 import com.qagroup.pages.Google;
 import com.qagroup.pages.GoogleStartPage;
+import com.qagroup.tools.GoogleTestListener;
 import com.qagroup.tools.IWebApp;
 import com.qagroup.tools.IWebAppTest;
 
+@Listeners(GoogleTestListener.class)
 public class KeyboardInputInteractionTest implements IWebAppTest {
 
 	private Google google = new Google();
@@ -30,7 +34,7 @@ public class KeyboardInputInteractionTest implements IWebAppTest {
 		assertEquals(googleStartPage.getSearchInputFieldValue(), typedText, "Incorrect text in Search input field:");
 	}
 
-	//@AfterClass(alwaysRun = true)
+	@AfterClass(alwaysRun = true)
 	public void tearDown() {
 		google.close();
 	}

@@ -1,14 +1,17 @@
 package com.qagroup.pages;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -91,13 +94,18 @@ public class GoogleStartPage {
 
 		for (String letter : letters) {
 			int index = keyValues.indexOf(letter);
+
+			if (index == -1)
+				throw new NoSuchElementException("There is no key with value [" + letter + "]");
+
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			keys.get(index).click();
+
+			clickJS(keys.get(index));
 		}
 	}
 
@@ -111,9 +119,6 @@ public class GoogleStartPage {
 	}
 
 	public static void main(String[] args) {
-		String hello = "Hello world";
-		String[] array = hello.split("");
-
-		System.out.println(Arrays.toString(array));
+		System.out.println(LocalDate.of(2017, 1, 1).compareTo(LocalDate.now()));
 	}
 }

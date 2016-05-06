@@ -1,10 +1,13 @@
 package com.qagroup.pages;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.qagroup.tools.Browser;
 import com.qagroup.tools.IWebApp;
 
 import ru.yandex.qatools.allure.annotations.Attachment;
@@ -17,8 +20,9 @@ public class Google implements IWebApp {
 
 	@Step("Opens Google start page")
 	public GoogleStartPage openStartPage() {
-		innerDriver = new FirefoxDriver();
-		// dr.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		innerDriver = Browser.start();
+
+		innerDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		innerDriver.manage().window().maximize();
 
 		innerDriver.get(baseUrl);
