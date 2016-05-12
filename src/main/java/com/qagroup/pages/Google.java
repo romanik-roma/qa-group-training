@@ -23,7 +23,7 @@ public class Google implements IWebApp {
 		innerDriver = Browser.start();
 
 		innerDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		innerDriver.manage().window().maximize();
+		//innerDriver.manage().window().maximize();
 
 		innerDriver.get(baseUrl);
 		GoogleStartPage page = new GoogleStartPage(innerDriver);
