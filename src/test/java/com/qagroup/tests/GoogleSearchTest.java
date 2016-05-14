@@ -4,10 +4,12 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.qagroup.pages.Google;
+import com.qagroup.pages.GoogleStartPage;
 import com.qagroup.pages.SearchResultsPage;
 import com.qagroup.tools.GoogleTestListener;
 import com.qagroup.tools.IWebApp;
@@ -17,7 +19,7 @@ import com.qagroup.tools.IWebAppTest;
 public class GoogleSearchTest implements IWebAppTest {
 
 	private Google google = new Google();
-
+	private GoogleStartPage startPage;
 	private SearchResultsPage searchResultsPage;
 
 	int expectedResultNumber = 10;
@@ -25,12 +27,14 @@ public class GoogleSearchTest implements IWebAppTest {
 
 	@BeforeClass
 	public void setUp() {
-		searchResultsPage = google.openStartPage().searchFor(textToSearch);
+		startPage = google.openStartPage();
+		// searchResultsPage = startPage.searchFor(textToSearch);
 	}
 
-	@Test
-	public void testResultNumber() {
-		int actualResutlNumber = searchResultsPage.getResultNumber();
+	@Test(dataProvider = "searchData")
+	public void testResultNumber(String searchCriteria) {
+		// int actualResutlNumber = searchResultsPage.getResultNumber();
+		int actualResutlNumber = startPage.searchFor(searchCriteria).getResultNumber();
 
 		assertEquals(actualResutlNumber, expectedResultNumber, "Incorrect number of found results:");
 	}
@@ -43,5 +47,10 @@ public class GoogleSearchTest implements IWebAppTest {
 	@Override
 	public IWebApp getTestedInstance() {
 		return google;
+	}
+
+	@DataProvider
+	public Object[][] searchData() {
+		return new Object[][] { { "Selenium IDE" }, { "Mozilla" }, { "Appium" }, { "hello world" } };
 	}
 }
